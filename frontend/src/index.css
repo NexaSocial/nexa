@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root main {
+  @apply h-screen p-4;
+}
+
+/* #content::before{
+  content: ' ';
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  background-image: url('/images/nicon.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+} */
+
+#content-wrap {
+  overflow: hidden;
+  position: relative;
+}
+
+#content-bg {
+  opacity: 0.1;
+  position: absolute;
+  /* left: 0;
+  top: 0; */
+  width: 75%;
+  height: auto;
+}
+
+#content {
+  position: relative;
+}
