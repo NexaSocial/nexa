@@ -20,7 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider theme={darkTheme({
+        <RainbowKitProvider locale="en" theme={darkTheme({
           accentColor: '#8F21EA',
           accentColorForeground: 'white',
           borderRadius: 'medium',

@@ -19,7 +19,8 @@ export default {
             dark: "#8213E7",
           },
           secondary: "#D86FFA",
-          background: "#021327",
+          background: "#180828",
+          // background: "#021327",
         },
       },
     }
