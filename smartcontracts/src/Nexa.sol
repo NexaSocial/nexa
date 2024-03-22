@@ -100,6 +100,20 @@ contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         return bytes(institutions[account].username).length > 0;
     }
 
+    function getStudentByUsername(
+        string memory username
+    ) external view returns (address) {
+        require(bytes(username).length > 0, "Username must not be empty");
+        return studentUsernameToAddress[username];
+    }
+
+    function getInstitutionByUsername(
+        string memory username
+    ) external view returns (address) {
+        require(bytes(username).length > 0, "Username must not be empty");
+        return institutionUsernameToAddress[username];
+    }
+
     //Institution Functons --------------------------------------
 
     function registerInstitution(
@@ -130,13 +144,6 @@ contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         institutionUsernameToAddress[username] = msg.sender;
 
         emit InstitutionRegistered(msg.sender, name, username, email);
-    }
-
-    function getInstitutionByUsername(
-        string memory username
-    ) external view returns (address) {
-        require(bytes(username).length > 0, "Username must not be empty");
-        return institutionUsernameToAddress[username];
     }
 
     function updateInstitutionInfo(
