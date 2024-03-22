@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {Script, console} from "forge-std/Script.sol";
+import {Script, console2} from "forge-std/Script.sol";
 import {NEXA} from "../src/Nexa.sol";
 
 contract NexaScript is Script {
@@ -16,9 +16,17 @@ contract NexaScript is Script {
         nexa = new NEXA();
 
         //Pegar o enderço do contraro
-        console.log("ADDRESS: ", address(nexa));
+        console2.log("ADDRESS: ", address(nexa));
 
-        console.log("OWNER", nexa.owner());
+        console2.log("OWNER", nexa.owner());
+
+        nexa.safeMint(0x70997970C51812dc3A010C7d01b50e0d17dc79C8, "http://localhost/");
+
+        string[] memory uris = nexa.getURIsFromJsonFiles(0x70997970C51812dc3A010C7d01b50e0d17dc79C8);
+
+        for (uint256 i = 0; i < uris.length; i++) {
+            console2.log(string(abi.encodePacked("URI: ", uris[i])));
+        }
 
         vm.stopBroadcast();
     }

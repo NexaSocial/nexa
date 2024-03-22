@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import {ERC721Enumerable} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import {ERC721URIStorage} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+import {ERC721} from "../node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import {ERC721Enumerable} from "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import {ERC721URIStorage} from "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import {Ownable} from "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     uint256 public gas = 0.1 ether;
@@ -15,7 +15,7 @@ contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     constructor() ERC721("NEXA", "NX") Ownable(msg.sender) {}
 
     function safeMint(address to, string memory uri) external payable {
-        require(msg.value >= gas + price, "Insufficient ether sent");
+        //require(msg.value >= gas + price, "Insufficient ether sent");
 
         //Retirar esta validação apenas para na rede testnet
         //require(validatedInstitutions[msg.sender], "Only validated institutions can mint");
@@ -25,9 +25,7 @@ contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         _setTokenURI(tokenId, uri);
     }
 
-    function getURIsFromJsonFiles(
-        address owner
-    ) external view returns (string[] memory) {
+    function getURIsFromJsonFiles(address owner) external view returns (string[] memory) {
         require(owner != address(0), "Owner address must not be empty");
         uint256 tokenCount = balanceOf(owner);
         string[] memory uris = new string[](tokenCount);
@@ -40,9 +38,7 @@ contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     //Owner functions ------------------------------------------------------------------
 
-    function validateInstitution(
-        address institutionAddress
-    ) external onlyOwner {
+    function validateInstitution(address institutionAddress) external onlyOwner {
         validatedInstitutions[institutionAddress] = true;
     }
 
@@ -64,30 +60,23 @@ contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     //Other functions ------------------------------------------------------------
 
-    function _update(
-        address to,
-        uint256 tokenId,
-        address auth
-    ) internal override(ERC721, ERC721Enumerable) returns (address) {
+    function _update(address to, uint256 tokenId, address auth)
+        internal
+        override(ERC721, ERC721Enumerable)
+        returns (address)
+    {
         return super._update(to, tokenId, auth);
     }
 
-    function _increaseBalance(
-        address account,
-        uint128 value
-    ) internal override(ERC721, ERC721Enumerable) {
+    function _increaseBalance(address account, uint128 value) internal override(ERC721, ERC721Enumerable) {
         super._increaseBalance(account, value);
     }
 
-    function tokenURI(
-        uint256 tokenId
-    ) public view override(ERC721, ERC721URIStorage) returns (string memory) {
+    function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
         return super.tokenURI(tokenId);
     }
 
-    function supportsInterface(
-        bytes4 interfaceId
-    )
+    function supportsInterface(bytes4 interfaceId)
         public
         view
         override(ERC721, ERC721Enumerable, ERC721URIStorage)
