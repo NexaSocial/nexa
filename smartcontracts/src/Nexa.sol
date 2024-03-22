@@ -7,17 +7,14 @@ import {ERC721URIStorage} from "../node_modules/@openzeppelin/contracts/token/ER
 import {Ownable} from "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
-    uint256 public gas = 0.1 ether;
-    uint256 public price = 0.1 ether;
-
     mapping(address => bool) public validatedInstitutions;
 
     constructor() ERC721("NEXA", "NX") Ownable(msg.sender) {}
 
-    function safeMint(address to, string memory uri) external payable {
-        //require(msg.value >= gas + price, "Insufficient ether sent");
 
-        //Retirar esta validação apenas para na rede testnet
+    function safeMint(address to, string memory uri) external payable {
+
+        //Retirar essa validação apenas para na rede testnet
         //require(validatedInstitutions[msg.sender], "Only validated institutions can mint");
 
         uint256 tokenId = totalSupply() + 1;
@@ -36,6 +33,7 @@ contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         return uris;
     }
 
+
     //Owner functions ------------------------------------------------------------------
 
     function validateInstitution(address institutionAddress) external onlyOwner {
@@ -46,42 +44,26 @@ contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         delete validatedInstitutions[institutionAddress];
     }
 
-    function setGas(uint256 _gas) external onlyOwner {
-        gas = _gas;
-    }
-
-    function setPrice(uint256 _price) external onlyOwner {
-        price = _price;
-    }
-
-    function withdraw() external onlyOwner {
+     function withdraw() external onlyOwner {
         payable(owner()).transfer(address(this).balance);
     }
 
     //Other functions ------------------------------------------------------------
 
-    function _update(address to, uint256 tokenId, address auth)
-        internal
-        override(ERC721, ERC721Enumerable)
-        returns (address)
-    {
+    function _update(address to, uint256 tokenId, address auth) internal override(ERC721, ERC721Enumerable) returns (address){
         return super._update(to, tokenId, auth);
     }
 
-    function _increaseBalance(address account, uint128 value) internal override(ERC721, ERC721Enumerable) {
+    function _increaseBalance(address account, uint128 value) internal override(ERC721, ERC721Enumerable){
         super._increaseBalance(account, value);
     }
 
-    function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
+    function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory){
         return super.tokenURI(tokenId);
     }
 
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        override(ERC721, ERC721Enumerable, ERC721URIStorage)
-        returns (bool)
-    {
+    function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721Enumerable, ERC721URIStorage) returns (bool){
         return super.supportsInterface(interfaceId);
     }
+
 }
