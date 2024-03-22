@@ -1,8 +1,15 @@
-import { Button, Tab, Tabs, useDisclosure, Checkbox, Input, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Textarea, Autocomplete, AutocompleteItem, } from "@nextui-org/react"
+import { Button, Tab, Tabs, useDisclosure, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Textarea, Autocomplete, AutocompleteItem, } from "@nextui-org/react"
 import Home from "./Home"
 import Profile from "./Profile"
+import {User} from "../models/UserModel";
 
-function Dashboard() {
+interface DashboardProps {
+    user: User;
+}
+
+function Dashboard(props: DashboardProps) {
+    const { user } = props;
+
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const animals = [
         { label: "Cat", value: "cat", description: "The second most popular pet in the world" },
@@ -16,8 +23,9 @@ function Dashboard() {
     return (
         <div id="dashboard" className="flex flex-col gap-6 items-start w-full justify-start">
             <div className="w-full flex justify-between items-center flex-wrap">
-                <h1 className="text-5xl text-slate-50 font-bold mb-4 md:mb-auto">Institution Name</h1>
+                <h1 className="text-5xl text-slate-50 font-bold mb-4 md:mb-auto">{user?.name}</h1>
                 <Button onPress={onOpen} color="primary" size="lg">Issue NFT Certificates</Button>
+                
             </div>
             <div className="w-full">
                 <Tabs>
@@ -25,7 +33,7 @@ function Dashboard() {
                         <Home />
                     </Tab>
                     <Tab key="profile" title="Profile">
-                        <Profile />
+                        <Profile user={user} />
                     </Tab>
                 </Tabs>
             </div>
