@@ -2,6 +2,7 @@ import { Button, Tab, Tabs, useDisclosure, Input, Modal, ModalBody, ModalContent
 import Home from "./Home"
 import Profile from "./Profile"
 import {User} from "../models/UserModel";
+import HomeUser from "./HomeUser";
 
 interface DashboardProps {
     user: User;
@@ -9,6 +10,7 @@ interface DashboardProps {
 
 function Dashboard(props: DashboardProps) {
     const { user } = props;
+    console.log('Dash', user);
 
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const animals = [
@@ -24,13 +26,17 @@ function Dashboard(props: DashboardProps) {
         <div id="dashboard" className="flex flex-col gap-6 items-start w-full justify-start">
             <div className="w-full flex justify-between items-center flex-wrap">
                 <h1 className="text-5xl text-slate-50 font-bold mb-4 md:mb-auto">{user?.name}</h1>
-                <Button onPress={onOpen} color="primary" size="lg">Issue NFT Certificates</Button>
+
+                {!user.is_user ?
+                    <Button onPress={onOpen} color="primary" size="lg">Issue NFT Certificates</Button>
+                    :<div></div>
+                }
                 
             </div>
             <div className="w-full">
                 <Tabs>
                     <Tab key="home" title="Home">
-                        <Home />
+                        {user.is_user ? <HomeUser/> : <Home />}
                     </Tab>
                     <Tab key="profile" title="Profile">
                         <Profile user={user} />

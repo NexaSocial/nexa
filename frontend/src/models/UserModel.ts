@@ -4,17 +4,17 @@ export class User {
     address:     string;
     username:    string;
     email:       string;
-    isValidated: boolean;
-    isUser:      boolean;
+    is_validated: boolean;
+    is_user:      boolean;
 
-    constructor(id:string, address:string, name: string, username: string, email: string, isValidated: boolean = false, isUser: boolean = true) {
+    constructor(id:string, address:string, name: string, username: string, email: string, is_validated: boolean = false, is_user: boolean = true) {
         this.id = id;
         this.address = address;
         this.name = name;
         this.username = username;
         this.email = email;
-        this.isValidated = isValidated;
-        this.isUser = isUser;
+        this.is_validated = is_validated;
+        this.is_user = is_user;
     }
 
     public static fromJson(json: any): User {
