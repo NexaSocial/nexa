@@ -14,18 +14,14 @@ contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     constructor() ERC721("NEXA", "NX") Ownable(msg.sender) {}
 
-    function safeMint(
-        address studentAddress,
-        string memory uri
-    ) external payable {
+    function safeMint(address to, string memory uri) external payable {
         require(msg.value >= gas + price, "Insufficient ether sent");
-        require(
-            validatedInstitutions[msg.sender],
-            "Only validated institutions can mint"
-        );
+
+        //Retirar esta validação apenas para na rede testnet
+        //require(validatedInstitutions[msg.sender], "Only validated institutions can mint");
 
         uint256 tokenId = totalSupply() + 1;
-        _safeMint(studentAddress, tokenId);
+        _safeMint(to, tokenId);
         _setTokenURI(tokenId, uri);
     }
 
