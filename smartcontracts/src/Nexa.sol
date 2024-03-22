@@ -79,7 +79,7 @@ contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         _addInstitutionToStudent(studentAddress);
     }
 
-    function getAllURIsOfOwner(
+    function getURIsFromJsonFiles(
         address owner
     ) external view returns (string[] memory) {
         require(owner != address(0), "Owner address must not be empty");
