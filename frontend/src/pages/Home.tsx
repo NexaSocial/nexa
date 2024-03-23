@@ -5,30 +5,21 @@ function Home() {
         <div className="flex flex-col gap-6 items-end">
             <Table aria-label="Example static collection table">
                 <TableHeader>
-                    <TableColumn>NAME</TableColumn>
-                    <TableColumn>ROLE</TableColumn>
-                    <TableColumn>STATUS</TableColumn>
+                    <TableColumn>STUDENT</TableColumn>
+                    <TableColumn>COURSE</TableColumn>
                 </TableHeader>
                 <TableBody>
                     <TableRow key="1">
-                        <TableCell>Tony Reichert</TableCell>
-                        <TableCell>CEO</TableCell>
-                        <TableCell>Active</TableCell>
+                        <TableCell>Alex Rogaleski Marques</TableCell>
+                        <TableCell>NEXA</TableCell>
                     </TableRow>
                     <TableRow key="2">
-                        <TableCell>Zoey Lang</TableCell>
+                        <TableCell>Marcos David</TableCell>
                         <TableCell>Technical Lead</TableCell>
-                        <TableCell>Paused</TableCell>
                     </TableRow>
                     <TableRow key="3">
-                        <TableCell>Jane Fisher</TableCell>
+                        <TableCell>Bruno Robson</TableCell>
                         <TableCell>Senior Developer</TableCell>
-                        <TableCell>Active</TableCell>
-                    </TableRow>
-                    <TableRow key="4">
-                        <TableCell>William Howard</TableCell>
-                        <TableCell>Community Manager</TableCell>
-                        <TableCell>Vacation</TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

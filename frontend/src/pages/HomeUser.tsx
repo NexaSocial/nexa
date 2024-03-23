@@ -3,44 +3,20 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react"
 function HomeUser() {
     const list = [
         {
-            title: "Orange",
-            img: "/images/icon.png",
-            price: "$5.50",
+            title: "NEXA Certificate",
+            img: "https://blue-recent-gorilla-290.mypinata.cloud/ipfs/QmXvHPSY2sMdDfTp7uwmCvZQMst6XpezgjZhDWELbKG5Ko",
         },
         {
-            title: "Tangerine",
-            img: "/images/icon.png",
-            price: "$3.00",
+            title: "NEXA Certificate",
+            img: "https://blue-recent-gorilla-290.mypinata.cloud/ipfs/QmXvHPSY2sMdDfTp7uwmCvZQMst6XpezgjZhDWELbKG5Ko",
         },
         {
-            title: "Raspberry",
-            img: "/images/icon.png",
-            price: "$10.00",
+            title: "NEXA Certificate",
+            img: "https://blue-recent-gorilla-290.mypinata.cloud/ipfs/QmXvHPSY2sMdDfTp7uwmCvZQMst6XpezgjZhDWELbKG5Ko",
         },
         {
-            title: "Lemon",
-            img: "/images/icon.png",
-            price: "$5.30",
-        },
-        {
-            title: "Avocado",
-            img: "/images/icon.png",
-            price: "$15.70",
-        },
-        {
-            title: "Lemon 2",
-            img: "/images/icon.png",
-            price: "$8.00",
-        },
-        {
-            title: "Banana",
-            img: "/images/icon.png",
-            price: "$7.50",
-        },
-        {
-            title: "Watermelon",
-            img: "/images/icon.png",
-            price: "$12.20",
+            title: "NEXA Certificate",
+            img: "https://blue-recent-gorilla-290.mypinata.cloud/ipfs/QmXvHPSY2sMdDfTp7uwmCvZQMst6XpezgjZhDWELbKG5Ko",
         },
     ];
 
@@ -60,7 +36,6 @@ function HomeUser() {
                     </CardBody>
                     <CardFooter className="text-small justify-between">
                         <b>{item.title}</b>
-                        <p className="text-default-500">{item.price}</p>
                     </CardFooter>
                 </Card>
             ))}

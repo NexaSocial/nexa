@@ -54,7 +54,7 @@ function App() {
           <ConnectButton />
         </div>
         <div id="content-wrap" className="h-full flex justify-center items-center">
-          <img id="content-bg" src="/images/nicon.png" />
+          <img id="content-bg" src="/images/back.png" />
           <div id="content" className="w-full h-full">
             {account.status === 'connected'
               ? <div className='w-full flex justify-center mt-24'>
