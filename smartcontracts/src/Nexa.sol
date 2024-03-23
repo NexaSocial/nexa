@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.20;
 
 import {ERC721} from "../node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {ERC721Enumerable} from "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
@@ -11,9 +11,7 @@ contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     constructor() ERC721("NEXA", "NX") Ownable(msg.sender) {}
 
-
     function safeMint(address to, string memory uri) external payable {
-
         //Retirar essa validação apenas para na rede testnet
         //require(validatedInstitutions[msg.sender], "Only validated institutions can mint");
 
@@ -33,7 +31,6 @@ contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         return uris;
     }
 
-
     //Owner functions ------------------------------------------------------------------
 
     function validateInstitution(address institutionAddress) external onlyOwner {
@@ -44,26 +41,34 @@ contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         delete validatedInstitutions[institutionAddress];
     }
 
-     function withdraw() external onlyOwner {
+    function withdraw() external onlyOwner {
         payable(owner()).transfer(address(this).balance);
     }
 
     //Other functions ------------------------------------------------------------
 
-    function _update(address to, uint256 tokenId, address auth) internal override(ERC721, ERC721Enumerable) returns (address){
+    function _update(address to, uint256 tokenId, address auth)
+        internal
+        override(ERC721, ERC721Enumerable)
+        returns (address)
+    {
         return super._update(to, tokenId, auth);
     }
 
-    function _increaseBalance(address account, uint128 value) internal override(ERC721, ERC721Enumerable){
+    function _increaseBalance(address account, uint128 value) internal override(ERC721, ERC721Enumerable) {
         super._increaseBalance(account, value);
     }
 
-    function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory){
+    function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
         return super.tokenURI(tokenId);
     }
 
-    function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721Enumerable, ERC721URIStorage) returns (bool){
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        override(ERC721, ERC721Enumerable, ERC721URIStorage)
+        returns (bool)
+    {
         return super.supportsInterface(interfaceId);
     }
-
 }

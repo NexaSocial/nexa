@@ -1,4 +1,11 @@
 {
     "solidity.formatter": "forge",
-    "solidity.enabledAsYouTypeCompilationErrorCheck": false
+    "solidity.enabledAsYouTypeCompilationErrorCheck": false,
+    "cSpell.words": [
+        "Nexa",
+        "nextui",
+        "rainbowkit",
+        "supabase",
+        "wagmi"
+    ]
 }
