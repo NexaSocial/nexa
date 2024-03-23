@@ -11,7 +11,7 @@ import { createClient } from '@supabase/supabase-js';
 const supabase = createClient("https://alqzijljfvoasmlaghii.supabase.co", import.meta.env.VITE_SUPABASE_KEY);
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<User | null>();
 
   const account = useAccount()
@@ -21,7 +21,7 @@ function App() {
     const { data: users } = await supabase
       .from('users')
       .select('*').eq('address', address);
-    if(users && users?.length > 0) {
+    if (users && users?.length > 0) {
       setUser(User.fromJson(users[0]));
     }
   }
