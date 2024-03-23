@@ -3,15 +3,15 @@ import Home from "./Home"
 import Profile from "./Profile"
 import { User } from "../models/UserModel";
 import HomeUser from "./HomeUser";
-import { createClient } from "@supabase/supabase-js";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useWriteContract } from "wagmi";
 import deployedContracts from "../../generated/deployedContracts"
 
-const supabase = createClient("https://alqzijljfvoasmlaghii.supabase.co", import.meta.env.VITE_SUPABASE_KEY);
+// const supabase = createClient("https://alqzijljfvoasmlaghii.supabase.co", import.meta.env.VITE_SUPABASE_KEY);
 
 interface DashboardProps {
     user: User;
+    supabase: any;
 }
 
 interface FormErrors {
@@ -24,7 +24,7 @@ interface FormErrors {
 }
 
 function Dashboard(props: DashboardProps) {
-    const { user } = props;
+    const { user, supabase } = props;
 
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -44,14 +44,6 @@ function Dashboard(props: DashboardProps) {
     const [errors, setErrors] = useState<FormErrors>({});
 
     const [isLoading, setIsLoading] = useState(false);
-    const [isCreated, setIsCreated] = useState(false);
-    const showCreated = () => {
-        setIsCreated(true);
-        setTimeout(() => {
-            setIsCreated(false);
-            // window.location.reload();
-        }, 3000);
-    };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -224,7 +216,7 @@ function Dashboard(props: DashboardProps) {
                         {user.is_user ? <HomeUser /> : <Home />}
                     </Tab>
                     <Tab key="profile" title="Profile">
-                        <Profile user={user} />
+                        <Profile user={user} supabase={supabase} />
                     </Tab>
                 </Tabs>
             </div>

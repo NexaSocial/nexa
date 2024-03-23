@@ -60,8 +60,8 @@ function App() {
               ? <div className='w-full flex justify-center mt-24'>
                 {
                   user
-                    ? <Dashboard user={user} />
-                    : <Register address={account.address} />
+                    ? <Dashboard user={user} supabase={supabase} />
+                    : <Register address={account.address} supabase={supabase} />
                 }
               </div>
               : <div className="h-full flex flex-col items-center justify-center gap-4">

@@ -1,12 +1,12 @@
 import { Button, Card, CardBody, CardFooter, CardHeader, Chip, Input } from "@nextui-org/react"
 import { User } from "../models/UserModel";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient("https://alqzijljfvoasmlaghii.supabase.co", import.meta.env.VITE_SUPABASE_KEY);
+// const supabase = createClient("https://alqzijljfvoasmlaghii.supabase.co", import.meta.env.VITE_SUPABASE_KEY);
 
 interface ComponentProps {
     user: User;
+    supabase: any;
 }
 
 interface FormErrors {
@@ -16,7 +16,7 @@ interface FormErrors {
 }
 
 function Profile(props: ComponentProps) {
-    const { user } = props;
+    const { user, supabase } = props;
 
     const [formData, setFormData] = useState({
         name: user.name ?? '',

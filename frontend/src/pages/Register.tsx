@@ -1,11 +1,11 @@
 import { Button, Card, CardBody, CardFooter, CardHeader, Chip, Image, Input } from "@nextui-org/react"
-import { createClient } from "@supabase/supabase-js";
 import { ChangeEvent, FormEvent, useMemo, useState } from "react";
 
-const supabase = createClient("https://alqzijljfvoasmlaghii.supabase.co", import.meta.env.VITE_SUPABASE_KEY);
+// const supabase = createClient("https://alqzijljfvoasmlaghii.supabase.co", import.meta.env.VITE_SUPABASE_KEY);
 
 interface ComponentProps {
     address: string;
+    supabase: any;
 }
 
 interface FormErrors {
@@ -15,7 +15,7 @@ interface FormErrors {
 }
 
 function Register(props: ComponentProps) {
-    const address = props;
+    const {address, supabase} = props;
 
     const [isUser, setIsUser] = useState<boolean>(true);
     const userColor = useMemo(() => isUser ? "primary" : "default", [isUser]);
@@ -69,7 +69,7 @@ function Register(props: ComponentProps) {
             setIsCreated(false);
             const { data: newUser, error } = await supabase
                 .from('users')
-                .insert({ ...formData, ...address, is_user: isUser, is_validated: true })
+                .insert({ ...formData, address: address, is_user: isUser, is_validated: true })
                 .select()
 
             if (newUser) {
