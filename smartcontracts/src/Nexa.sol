@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.20;
 
 import {ERC721} from "../node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {ERC721Enumerable} from "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
@@ -7,17 +7,12 @@ import {ERC721URIStorage} from "../node_modules/@openzeppelin/contracts/token/ER
 import {Ownable} from "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
-    uint256 public gas = 0.1 ether;
-    uint256 public price = 0.1 ether;
-
     mapping(address => bool) public validatedInstitutions;
 
     constructor() ERC721("NEXA", "NX") Ownable(msg.sender) {}
 
     function safeMint(address to, string memory uri) external payable {
-        //require(msg.value >= gas + price, "Insufficient ether sent");
-
-        //Retirar esta validação apenas para na rede testnet
+        //Retirar essa validação apenas para na rede testnet
         //require(validatedInstitutions[msg.sender], "Only validated institutions can mint");
 
         uint256 tokenId = totalSupply() + 1;
@@ -44,14 +39,6 @@ contract NEXA is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     function removeInstitution(address institutionAddress) external onlyOwner {
         delete validatedInstitutions[institutionAddress];
-    }
-
-    function setGas(uint256 _gas) external onlyOwner {
-        gas = _gas;
-    }
-
-    function setPrice(uint256 _price) external onlyOwner {
-        price = _price;
     }
 
     function withdraw() external onlyOwner {
